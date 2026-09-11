@@ -5,8 +5,8 @@ const name = 'Luca Claus'
 const course = 'B.Sc. Informatik — Master ab Sep 2026'
 const university = 'Hochschule Karlsruhe (HKA)'
 const mail = 'kontakt@lucaclaus.de'
-const linkedin = 'https://www.linkedin.com/in/dein-profil/'
-const github = 'https://github.com/dein-benutzername'
+const linkedin = 'https://www.linkedin.com/in/luca-claus-0a2b23297/'
+const github = 'https://github.com/Luckyly26'
 
 const highlights = [
   { title: 'Schnelle Entwicklung', text: 'Moderne Toolchain: Vue 3 + Vite für produktive Iteration.' },
@@ -24,6 +24,64 @@ const education = [
   { year: 'B.Sc.', title: 'Bachelor of Science (Informatik)', org: university },
   { year: 'ab Sep 2026', title: 'Masterstudium Informatik', org: university },
 ]
+
+const timeline = [
+  {
+    period: 'Sep 2022 – Aug 2026',
+    title: 'BA-Studium Informatik',
+    type: 'Studium',
+    startMonth: 0,
+    endMonth: 48,
+    organization: university,
+    description: 'Bachelorstudium der Informatik an der Hochschule Karlsruhe.',
+  },
+  {
+    period: 'März – Aug 2024',
+    title: 'Praxissemester',
+    type: 'Berufserfahrung',
+    startMonth: 18,
+    endMonth: 24,
+    organization: 'abas GmbH',
+    description: 'Praktische Erfahrungen und Mitarbeit an Projekten bei abas.',
+  },
+  {
+    period: 'Okt 2024 – Feb 2026',
+    title: 'Werkstudent',
+    type: 'Berufserfahrung',
+    startMonth: 25,
+    endMonth: 42,
+    organization: 'abas GmbH',
+    description: 'Werkstudentische Tätigkeit neben dem Informatikstudium.',
+  },
+  {
+    period: 'März – Juli 2026',
+    title: 'BA-Thesis',
+    type: 'Abschlussarbeit',
+    startMonth: 42,
+    endMonth: 47,
+    organization: 'abas GmbH',
+    description: 'Bachelorarbeit zur Sicherheitskonzeption für Cloud-ERP-Customizing.',
+  },
+  {
+    period: 'Seit Sep 2026',
+    title: 'MA-Studium Informatik',
+    type: 'Studium',
+    startMonth: 48,
+    endMonth: 49,
+    organization: university,
+    description: 'Masterstudium der Informatik an der Hochschule Karlsruhe.',
+  },
+]
+
+const selectedTimelineItem = ref(timeline[0])
+const timelineDuration = 49
+
+function selectedTimelineStyle() {
+  return {
+    '--timeline-start': `${(selectedTimelineItem.value.startMonth / timelineDuration) * 100}%`,
+    '--timeline-width': `${((selectedTimelineItem.value.endMonth - selectedTimelineItem.value.startMonth) / timelineDuration) * 100}%`,
+  }
+}
 
 const skills = ['Java', 'Python', 'C++', 'JavaScript', 'Vue.js', 'Datenbanken', 'Git']
 
@@ -43,11 +101,11 @@ const projects = ref([
     tech: ['DORA','Data Analysis','Reporting']
   },
   {
-    title: 'Algorithmus-Visualisierung',
-    desc: 'Interaktive Visualisierung von Such- und Sortieralgorithmen (Web).',
+    title: 'Portfolio-Website',
+    desc: 'Persönliche Portfolio-Website mit Informationen zu meinem Werdegang, meinen Projekten und meinen Fähigkeiten.',
     link: '#',
     github: '#',
-    tech: ['JavaScript','Canvas']
+    tech: ['Vue.js', 'Vite', 'GitHub Pages']
   }
 ])
 
@@ -75,6 +133,31 @@ const workExperience = [
   { period: 'Oktober 2024 – Februar 2026', role: 'Werkstudent', company: 'abas GmbH', site: 'https://www.abas-erp.com' },
   { period: 'März 2026 – Juli 2026', role: 'Thesis', company: 'abas GmbH', site: 'https://www.abas-erp.com' },
 ]
+
+const volunteering = [
+  {
+    period: 'Seit Oktober 2025',
+    role: '1. Kassenwart',
+    organization: 'Förderverein der Fachschaft IWI e.V.',
+  },
+  {
+    period: 'Seit Oktober 2025',
+    role: 'Teamlead Sponsoring',
+    organization: 'Förderverein der Fachschaft IWI e.V.',
+  },
+  {
+    period: 'Oktober 2024 – September 2025',
+    role: 'Fachbereich Sponsoring',
+    organization: 'Fachschaft IWI | Hochschule Karlsruhe',
+    description: 'Verantwortlich für die Kommunikation mit unseren Sponsoringpartnern.',
+  },
+  {
+    period: 'Seit Januar 2018',
+    role: 'Betreuer Kinderfreizeit',
+    organization: 'Prot. Kirchengemeinde Waldsee-Otterstadt',
+    description: 'Betreuung der Kinder während der jährlichen Kinderfreizeit sowie Einarbeitung neuer Betreuerinnen und Betreuer.',
+  },
+]
 </script>
 
 <template>
@@ -82,6 +165,8 @@ const workExperience = [
     <nav class="nav">
       <div class="nav__links">
         <a href="#about">Über</a>
+        <a href="#timeline">Werdegang</a>
+        <a href="#ehrenamt">Ehrenamt</a>
         <a href="#highlights">Features</a>
         <a href="#deploy">Deployment</a>
         <a href="#contact">Kontakt</a>
@@ -110,10 +195,6 @@ const workExperience = [
             <span>Uni</span>
             <strong>{{ university }}</strong>
           </div>
-          <div class="panel-card">
-            <span>Resume</span>
-            <strong><a href="#">CV herunterladen</a></strong>
-          </div>
         </div>
       </section>
 
@@ -121,6 +202,51 @@ const workExperience = [
         <article class="info-card" style="grid-column: span 3">
           <h2>Über mich</h2>
           <p>Ich studiere Informatik und arbeite an Projekten in den Bereichen Webentwicklung, Algorithmen und Datensysteme. Ich suche praktische Erfahrungen, Praktika und spannende Projektzusammenarbeiten.</p>
+        </article>
+      </section>
+
+      <section id="timeline" class="timeline-section">
+        <div class="timeline-heading">
+          <p class="eyebrow">Werdegang</p>
+          <h2>Mein Weg durch Studium und Beruf</h2>
+        </div>
+
+        <div class="timeline-overview" :style="selectedTimelineStyle()" aria-label="Position des ausgewählten Zeitraums auf der Gesamtzeitleiste">
+          <span class="timeline-overview__active" aria-hidden="true"></span>
+        </div>
+
+        <div class="timeline" aria-label="Zeitstrahl des Werdegangs">
+          <button
+            v-for="item in timeline"
+            :key="item.title"
+            class="timeline-item"
+            :class="{ 'timeline-item--active': selectedTimelineItem.title === item.title }"
+            type="button"
+            :aria-pressed="selectedTimelineItem.title === item.title"
+            @click="selectedTimelineItem = item"
+          >
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <span class="timeline-period">{{ item.period }}</span>
+            <strong>{{ item.title }}</strong>
+            <span class="timeline-type">{{ item.type }}</span>
+          </button>
+        </div>
+
+        <article class="timeline-detail" aria-live="polite">
+          <div>
+            <p class="eyebrow">Ausgewählt</p>
+            <h3>{{ selectedTimelineItem.title }}</h3>
+          </div>
+          <div>
+            <p class="timeline-detail__period">{{ selectedTimelineItem.period }}</p>
+            <p>{{ selectedTimelineItem.description }}</p>
+            <a v-if="selectedTimelineItem.organization === 'abas GmbH'" href="https://www.abas-erp.com" target="_blank" rel="noopener">{{ selectedTimelineItem.organization }}</a>
+            <p v-else class="timeline-detail__organization">{{ selectedTimelineItem.organization }}</p>
+          </div>
+          <a v-if="['Berufserfahrung', 'Abschlussarbeit'].includes(selectedTimelineItem.type)" class="timeline-detail__more" href="#wirtschaft">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            <span>Siehe mehr</span>
+          </a>
         </article>
       </section>
 
@@ -164,6 +290,21 @@ const workExperience = [
           <p>{{ w.period }}</p>
           <p><a :href="w.site" target="_blank" rel="noopener">{{ w.site }}</a></p>
         </article>
+      </section>
+
+      <section id="ehrenamt" class="section-grid" style="margin-top:18px">
+        <article style="grid-column: span 3">
+          <h2>Ehrenamt</h2>
+        </article>
+
+        <div class="ehrenamt-track" aria-label="Ehrenamtliche Tätigkeiten">
+          <article v-for="item in volunteering" :key="`${item.role}-${item.period}`" class="info-card ehrenamt-card">
+            <h3>{{ item.role }}</h3>
+            <p>{{ item.organization }}</p>
+            <p>{{ item.period }}</p>
+            <p v-if="item.description">{{ item.description }}</p>
+          </article>
+        </div>
       </section>
 
       <footer id="contact" class="site-footer">
