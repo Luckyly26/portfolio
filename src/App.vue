@@ -87,15 +87,16 @@ const skills = ['Java', 'Python', 'C++', 'JavaScript', 'Vue.js', 'Datenbanken', 
 
 const projects = ref([
   {
+    id: 'bachelorarbeit',
     title: 'Bachelorarbeit: Sicherheitskonzeption für Cloud-ERP-Customizing',
-    desc: 'Sicherheitskonzeption und Risikoanalyse (STRIDE/OWASP) für Cloud-basiertes ERP-Customizing bei Forterro/abas.',
+    desc: 'Sicherheitskonzeption und Risikoanalyse (STRIDE/OWASP top 10) für Cloud-basiertes ERP-Customizing bei abas erp.',
     link: 'https://www.abas-erp.com',
     github: '#',
-    tech: ['STRIDE','OWASP','Cloud Security']
+    tech: ['STRIDE','OWASP top 10','Cloud Security', 'ERP-Customizing', 'Risk Analysis', 'Software Architecture']
   },
   {
     title: 'Seminararbeit: DORA-Metriken',
-    desc: 'Erhebung, Analyse und Visualisierung von DORA-Metriken; Implementierung von Auswertungs-Skripten und Reporting.',
+    desc: 'Wissenschaftliche Ausarbeitung der DORA-Metriken (DevOps Research and Assessment) als Grundlage für die Analyse und Verbesserung von DevOps-Praktiken.',
     link: '#',
     github: '#',
     tech: ['DORA','Data Analysis','Reporting']
@@ -129,9 +130,9 @@ onUnmounted(() => {
 })
 
 const workExperience = [
-  { period: 'März 2024 – August 2024', role: 'Praktikant (Praxissemester)', company: 'abas GmbH', site: 'https://www.abas-erp.com' },
-  { period: 'Oktober 2024 – Februar 2026', role: 'Werkstudent', company: 'abas GmbH', site: 'https://www.abas-erp.com' },
-  { period: 'März 2026 – Juli 2026', role: 'Thesis', company: 'abas GmbH', site: 'https://www.abas-erp.com' },
+  { period: 'März 2024 – August 2024', role: 'Praktikant (Praxissemester)', desc: 'Praktikum in der Anwendungsentwicklung eines ERP-Systems', company: 'abas GmbH', site: 'https://www.abas-erp.com' },
+  { period: 'Oktober 2024 – Februar 2026', role: 'Werkstudent', desc: 'Arbeit in der Softwareentwicklung und -wartung von ERP-Systemen', company: 'abas GmbH', site: 'https://www.abas-erp.com' },
+  { period: 'März 2026 – Juli 2026', role: 'Thesis', desc: 'siehe Bachelorarbeit', company: 'abas GmbH', site: 'https://www.abas-erp.com' },
 ]
 
 const volunteering = [
@@ -167,8 +168,6 @@ const volunteering = [
         <a href="#about">Über</a>
         <a href="#timeline">Werdegang</a>
         <a href="#ehrenamt">Ehrenamt</a>
-        <a href="#highlights">Features</a>
-        <a href="#deploy">Deployment</a>
         <a href="#contact">Kontakt</a>
       </div>
     </nav>
@@ -188,7 +187,7 @@ const volunteering = [
 
         <div class="hero__panel">
           <div class="panel-card panel-card--accent">
-            <span>Rolle</span>
+            <span>Bildungsgrad</span>
             <strong>{{ course }}</strong>
           </div>
           <div class="panel-card">
@@ -201,7 +200,9 @@ const volunteering = [
       <section id="about" class="section-grid">
         <article class="info-card" style="grid-column: span 3">
           <h2>Über mich</h2>
-          <p>Ich studiere Informatik und arbeite an Projekten in den Bereichen Webentwicklung, Algorithmen und Datensysteme. Ich suche praktische Erfahrungen, Praktika und spannende Projektzusammenarbeiten.</p>
+          <p>Ich bin Luca, Informatikstudent an der Hochschule Karlsruhe. Nach meinem Bachelorstudium studiere ich seit September 2026 im Master weiter und vertiefe dabei meine Interessen an Webentwicklung, Algorithmen und sicheren Softwaresystemen.</p>
+          <p>Ergänzend zu meinem Studium vertiefe ich stetig meine Fähigkeiten im wirtschaftlichen Umfeld. Durch mein Praxissemester mit darauf folgenden Werkstudententätigkeit und Bachelorarbeit bei der Forterro Deutschland abas GmbH habe ich zuätzliche praktische Erfahrungen in dem Bereich erworben.</p>
+          <p>Davon abgesehen engagiere ich mich ehrenamtlich in verschiedenen Positionen und arbeite gerne mit Menschen an gemeinsamen Projekten.</p>
         </article>
       </section>
 
@@ -255,7 +256,7 @@ const volunteering = [
           <h2>Projekte</h2>
         </article>
 
-        <article v-for="p in projects" :key="p.title" class="info-card">
+        <article v-for="p in projects" :key="p.title" :id="p.id" class="info-card">
           <h3>{{ p.title }}</h3>
           <p>{{ p.desc }}</p>
           <p>
@@ -288,7 +289,9 @@ const volunteering = [
         <article v-for="w in workExperience" :key="w.period" class="info-card">
           <h3>{{ w.role }} — {{ w.company }}</h3>
           <p>{{ w.period }}</p>
-          <p><a :href="w.site" target="_blank" rel="noopener">{{ w.site }}</a></p>
+          <p>{{ w.desc }}</p>
+          <p v-if="w.role === 'Thesis'"><a href="#bachelorarbeit">Zur Bachelorarbeit</a></p>
+          <p v-else><a :href="w.site" target="_blank" rel="noopener">{{ w.site }}</a></p>
         </article>
       </section>
 
