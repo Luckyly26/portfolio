@@ -4,25 +4,20 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const name = 'Luca Claus'
 const course = 'B.Sc. Informatik — Master ab Sep 2026'
 const university = 'Hochschule Karlsruhe (HKA)'
+const employer = {
+  name: 'abas',
+  legalName: 'Forterro Deutschland abas GmbH',
+  website: 'https://www.abas-erp.com',
+}
 const mail = 'kontakt@lucaclaus.de'
 const linkedin = 'https://www.linkedin.com/in/luca-claus-0a2b23297/'
 const github = 'https://github.com/Luckyly26'
-
-const highlights = [
-  { title: 'Schnelle Entwicklung', text: 'Moderne Toolchain: Vue 3 + Vite für produktive Iteration.' },
-  { title: 'Einfache Veröffentlichung', text: 'Deploy über GitHub Pages mit einem Build-Script.' },
-  { title: 'Retro-Look', text: 'Pixeliger Stil für ein auffälliges Portfolio.' },
-]
+const fachschaft = 'https://iwi-hka.de/about/'
 
 const steps = [
   'Repository auf GitHub anlegen oder verbinden.',
   'npm install und lokal testen (npm run dev).',
   'Build und deployen (npm run build && npm run deploy).',
-]
-
-const education = [
-  { year: 'B.Sc.', title: 'Bachelor of Science (Informatik)', org: university },
-  { year: 'ab Sep 2026', title: 'Masterstudium Informatik', org: university },
 ]
 
 const timeline = [
@@ -41,7 +36,7 @@ const timeline = [
     type: 'Berufserfahrung',
     startMonth: 18,
     endMonth: 24,
-    organization: 'abas GmbH',
+    organization: employer.name,
     description: 'Praktische Erfahrungen und Mitarbeit an Projekten bei abas.',
   },
   {
@@ -50,7 +45,7 @@ const timeline = [
     type: 'Berufserfahrung',
     startMonth: 25,
     endMonth: 42,
-    organization: 'abas GmbH',
+    organization: employer.name,
     description: 'Werkstudentische Tätigkeit neben dem Informatikstudium.',
   },
   {
@@ -59,7 +54,7 @@ const timeline = [
     type: 'Abschlussarbeit',
     startMonth: 42,
     endMonth: 47,
-    organization: 'abas GmbH',
+    organization: employer.name,
     description: 'Bachelorarbeit zur Sicherheitskonzeption für Cloud-ERP-Customizing.',
   },
   {
@@ -67,14 +62,24 @@ const timeline = [
     title: 'MA-Studium Informatik',
     type: 'Studium',
     startMonth: 48,
-    endMonth: 49,
+    endMonth: 48,
     organization: university,
     description: 'Masterstudium der Informatik an der Hochschule Karlsruhe.',
   },
 ]
 
 const selectedTimelineItem = ref(timeline[0])
-const timelineDuration = 49
+const timelineDuration = 48
+const timelineMarkers = [
+  { label: '2023', month: 4 },
+  { label: '2024', month: 16 },
+  { label: '2025', month: 28 },
+  { label: '2026', month: 40 },
+]
+
+function timelineMarkerStyle(month) {
+  return { left: `${(month / timelineDuration) * 100}%` }
+}
 
 function selectedTimelineStyle() {
   return {
@@ -83,38 +88,69 @@ function selectedTimelineStyle() {
   }
 }
 
-const skills = ['Java', 'Python', 'C++', 'JavaScript', 'Vue.js', 'Datenbanken', 'Git']
+const skillGroups = [
+  {
+    title: 'Tech-Skills',
+    label: 'Werkzeuge & Sprachen',
+    description: 'Technologien, mit denen ich entwickle und arbeite.',
+    items: ['Java', 'Python', 'C++', 'JavaScript', 'Vue.js', 'Git', 'SQL', 'Linux', 'Docker', 'Cucumber', 'Unix'],
+  },
+  {
+    title: 'Know-how',
+    label: 'Methoden & Systeme',
+    description: 'Fachliche Schwerpunkte aus Studium und Berufserfahrung.',
+    items: ['Datenbanken', 'Webentwicklung', 'Systemprogrammierung', 'Cloud Security', 'ERP-Customizing', 'Softwarearchitektur', 'Agile Methoden', 'DevOps', 'Penetration Testing', 'DORA-Metriken', 'STRIDE', 'OWASP Top 10'],
+  },
+  {
+    title: 'Softskills',
+    label: 'Zusammenarbeit',
+    description: 'Stärken, die meine Arbeit im Team und an Projekten prägen.',
+    items: ['Teamarbeit', 'Kommunikation', 'Analytisches Denken', 'Projektkoordination', 'Ehrenamtliches Engagement', 'Selbstorganisation', 'Problemlösungskompetenz'],
+  },
+]
+
+const selectedSkillGroup = ref(skillGroups[0])
 
 const projects = ref([
   {
     id: 'bachelorarbeit',
     title: 'Bachelorarbeit: Sicherheitskonzeption für Cloud-ERP-Customizing',
     desc: 'Sicherheitskonzeption und Risikoanalyse (STRIDE/OWASP top 10) für Cloud-basiertes ERP-Customizing bei abas erp.',
-    link: 'https://www.abas-erp.com',
-    github: '#',
     tech: ['STRIDE','OWASP top 10','Cloud Security', 'ERP-Customizing', 'Risk Analysis', 'Software Architecture']
+  },
+  {
+    title: 'Aufbau von DORA-Metriken bei abas',
+    desc: 'Im Rahmen meiner Tätigkeit bei abas habe ich DORA-Metriken für den betrachteten Entwicklungsbereich erstmals aufgesetzt und definiert. Die daraus entstandenen Erkenntnisse bildeten die Grundlage für meine Seminararbeit.',
+    tech: ['DORA-Metriken', 'DevOps', 'Data Analysis', 'Definition von KPIs']
   },
   {
     title: 'Seminararbeit: DORA-Metriken',
     desc: 'Wissenschaftliche Ausarbeitung der DORA-Metriken (DevOps Research and Assessment) als Grundlage für die Analyse und Verbesserung von DevOps-Praktiken.',
-    link: '#',
-    github: '#',
     tech: ['DORA','Data Analysis','Reporting']
+  },
+  {
+    id: 'ethical-hacking-pentest',
+    title: 'Pentest: Ethical Hacking',
+    desc: 'Durchführung eines umfassenden Pentests im Rahmen der Vorlesung Ethical Hacking an der Hochschule Karlsruhe. Analyse von Sicherheitslücken und Erstellung eines Abschlussberichts.', 
+    tech: ['Penetration Testing', 'Ethical Hacking', 'Web Security', 'Security Analysis'],
+    certificates: [
+      { label: 'Zertifikat (DE)', href: './assets/Zertifikate/20260222_HKA_IWI_Zertifikat_Ethical_Hacking_Luca%20Claus_de.pdf' },
+      { label: 'Certificate (EN)', href: './assets/Zertifikate/20260222_HKA_IWI_Zertifikat_Ethical_Hacking_Loca_Claus_en.pdf' },
+    ]
   },
   {
     title: 'Portfolio-Website',
     desc: 'Persönliche Portfolio-Website mit Informationen zu meinem Werdegang, meinen Projekten und meinen Fähigkeiten.',
-    link: '#',
-    github: '#',
+    github: 'https://github.com/Luckyly26/portfolio',
     tech: ['Vue.js', 'Vite', 'GitHub Pages']
   }
 ])
 
 const projectsBand = ref(null)
+const ehrenamtBand = ref(null)
 
 function onWheel(e) {
-  const el = projectsBand.value
-  if (!el) return
+  const el = e.currentTarget
   if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
     e.preventDefault()
     el.scrollLeft += e.deltaY
@@ -123,54 +159,76 @@ function onWheel(e) {
 
 onMounted(() => {
   if (projectsBand.value) projectsBand.value.addEventListener('wheel', onWheel, { passive: false })
+  if (ehrenamtBand.value) ehrenamtBand.value.addEventListener('wheel', onWheel, { passive: false })
 })
 
 onUnmounted(() => {
   if (projectsBand.value) projectsBand.value.removeEventListener('wheel', onWheel)
+  if (ehrenamtBand.value) ehrenamtBand.value.removeEventListener('wheel', onWheel)
 })
 
 const workExperience = [
-  { period: 'März 2024 – August 2024', role: 'Praktikant (Praxissemester)', desc: 'Praktikum in der Anwendungsentwicklung eines ERP-Systems', company: 'abas GmbH', site: 'https://www.abas-erp.com' },
-  { period: 'Oktober 2024 – Februar 2026', role: 'Werkstudent', desc: 'Arbeit in der Softwareentwicklung und -wartung von ERP-Systemen', company: 'abas GmbH', site: 'https://www.abas-erp.com' },
-  { period: 'März 2026 – Juli 2026', role: 'Thesis', desc: 'siehe Bachelorarbeit', company: 'abas GmbH', site: 'https://www.abas-erp.com' },
+  { 
+    period: 'März 2024 – August 2024', 
+    role: 'Praktikant (Praxissemester)', 
+    desc: 'Praktikum in der Anwendungsentwicklung eines ERP-Systems. Erstellung eines Testauswertungs-Tools und Mitarbeit in der Anwendungsentwicklung.', 
+    company: employer.name, site: employer.website 
+  },
+  { 
+    period: 'Oktober 2024 – Februar 2026', 
+    role: 'Werkstudent', 
+    desc: 'Arbeit in der Anwendungsentwicklung und Wartung den ERP-Systems. Testmigration und Übersetzung in Cucumber.', 
+    company: employer.name, 
+    site: employer.website 
+  },
+  { 
+    period: 'März 2026 – Juli 2026', 
+    role: 'Bachelorthesis', 
+    desc: 'Sicherheitskonzeption für Cloud-basiertes ERP-Customizing. Risikoanalyse (STRIDE/OWASP top 10) und Erstellung eines Sicherheitskonzepts.', 
+    company: employer.name, 
+    site: employer.website 
+  },
 ]
 
 const volunteering = [
+    {
+    period: 'Seit September 2026',
+    role: 'Mitglied im Fakultätsrat der Fakultät IWI',
+    organization: 'Hochschule Karlsruhe',
+    description: 'Gewähltes Mitglied im Fakultätsrat der Fakultät IWI. Verantwortlich für die Vertretung und Repräsentation der Studierenden in Fakultätsausschüssen.',
+    site: 'https://asta-hka.de/hs-politik/',
+  },
   {
     period: 'Seit Oktober 2025',
     role: '1. Kassenwart',
     organization: 'Förderverein der Fachschaft IWI e.V.',
+    site: fachschaft,
   },
   {
     period: 'Seit Oktober 2025',
     role: 'Teamlead Sponsoring',
-    organization: 'Förderverein der Fachschaft IWI e.V.',
+    organization: 'Fachschaft IWI | Hochschule Karlsruhe',
+    description: 'Verantwortung und Koordination des Sponsoringteams, sowie der Kooperationsevents mit den Sponsoringpartnern.',
+    site: fachschaft,
   },
   {
     period: 'Oktober 2024 – September 2025',
     role: 'Fachbereich Sponsoring',
     organization: 'Fachschaft IWI | Hochschule Karlsruhe',
-    description: 'Verantwortlich für die Kommunikation mit unseren Sponsoringpartnern.',
+    description: 'Verantwortlich für die Kommunikation und Kooperation mit den Sponsoringpartnern.',
+      site: fachschaft,
   },
   {
     period: 'Seit Januar 2018',
     role: 'Betreuer Kinderfreizeit',
     organization: 'Prot. Kirchengemeinde Waldsee-Otterstadt',
-    description: 'Betreuung der Kinder während der jährlichen Kinderfreizeit sowie Einarbeitung neuer Betreuerinnen und Betreuer.',
+    description: 'Programmplanung und Betreuung der Kinder während der jährlichen Kinderfreizeit sowie Einarbeitung neuer Betreuerinnen und Betreuer.',
   },
 ]
 </script>
 
 <template>
   <div>
-    <nav class="nav">
-      <div class="nav__links">
-        <a href="#about">Über</a>
-        <a href="#timeline">Werdegang</a>
-        <a href="#ehrenamt">Ehrenamt</a>
-        <a href="#contact">Kontakt</a>
-      </div>
-    </nav>
 
     <main class="page-shell">
       <section class="hero">
@@ -178,21 +236,51 @@ const volunteering = [
           <p class="eyebrow">Portfolio</p>
           <h1>{{ name }}</h1>
           <p class="lead">{{ course }} — {{ university }}</p>
-          <p class="lead">Ich bin Informatikstudent mit Interesse an Algorithmen, Webentwicklung und Systemprogrammierung. Auf dieser Seite findest du Projekte, Fähigkeiten und Kontaktmöglichkeiten.</p>
+          <p class="lead">Ich bin Informatikstudent mit Interesse an Security-Architektur, Webentwicklung und Systemprogrammierung. Auf dieser Seite sind meine Projekte, Fähigkeiten und bereits gesammelte Erfahrungen zusammengefasst.</p>
           <div class="hero__actions">
-            <a class="button button--primary" href="#projects">Projekte</a>
-            <a class="button button--ghost" href="#contact">Kontakt</a>
+            <a class="button button--ghost" href="#about">Über</a>
+            <a class="button button--ghost" href="#timeline">Werdegang</a>
+            <a class="button button--project" href="#projects">Projekte</a>
+            <a class="button button--ghost" href="#skills">Fähigkeiten</a>
+            <a class="button button--wirtschaft" href="#wirtschaft">Berufserfahrung</a>
+            <a class="button button--ehrenamt" href="#ehrenamt">Ehrenamt</a>
+            <a class="button button--primary" href="#contact">Kontakt</a>
           </div>
         </div>
 
         <div class="hero__panel">
           <div class="panel-card panel-card--accent">
-            <span>Bildungsgrad</span>
-            <strong>{{ course }}</strong>
+            <span>Hauptinteressen</span>
+            <strong>Security · DevOps · Webentwicklung</strong>
           </div>
           <div class="panel-card">
-            <span>Uni</span>
-            <strong>{{ university }}</strong>
+            <span>Berufserfahrung</span>
+            <strong>Softwareentwicklung bei {{ employer.name }}</strong>
+          </div>
+          <div class="panel-card">
+            <span>Sprachen</span>
+            <strong class="language-list">
+              <span class="language-item">
+                <svg class="language-flag" viewBox="0 0 24 16" role="img" aria-label="Deutschlandflagge">
+                  <rect width="24" height="16" fill="#ffce00" />
+                  <rect width="24" height="10.67" fill="#dd0000" />
+                  <rect width="24" height="5.33" fill="#111" />
+                </svg>
+                <span aria-hidden="true">-</span>
+                <span>Muttersprache</span>
+              </span>
+              <span class="language-item">
+                <svg class="language-flag" viewBox="0 0 24 16" role="img" aria-label="Flagge des Vereinigten Königreichs">
+                  <rect width="24" height="16" fill="#012169" />
+                  <path d="M0 0 24 16M24 0 0 16" stroke="#fff" stroke-width="4" />
+                  <path d="M0 0 24 16M24 0 0 16" stroke="#c8102e" stroke-width="1.7" />
+                  <path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="5" />
+                  <path d="M12 0v16M0 8h24" stroke="#c8102e" stroke-width="2.8" />
+                </svg>
+                <span aria-hidden="true">-</span>
+                <span>Geschäftssicher</span>
+              </span>
+            </strong>
           </div>
         </div>
       </section>
@@ -200,9 +288,10 @@ const volunteering = [
       <section id="about" class="section-grid">
         <article class="info-card" style="grid-column: span 3">
           <h2>Über mich</h2>
-          <p>Ich bin Luca, Informatikstudent an der Hochschule Karlsruhe. Nach meinem Bachelorstudium studiere ich seit September 2026 im Master weiter und vertiefe dabei meine Interessen an Webentwicklung, Algorithmen und sicheren Softwaresystemen.</p>
-          <p>Ergänzend zu meinem Studium vertiefe ich stetig meine Fähigkeiten im wirtschaftlichen Umfeld. Durch mein Praxissemester mit darauf folgenden Werkstudententätigkeit und Bachelorarbeit bei der Forterro Deutschland abas GmbH habe ich zuätzliche praktische Erfahrungen in dem Bereich erworben.</p>
+          <p>Ich bin Luca, Informatikstudent an der Hochschule Karlsruhe. Nach meinem Bachelorstudium studiere ich seit September 2026 im Master weiter und vertiefe dabei meine Interessen an Webentwicklung, Softwarearchitektur und sicheren Softwaresystemen.</p>
+          <p>Ergänzend zu meinem Studium vertiefe ich stetig meine Fähigkeiten im wirtschaftlichen Umfeld. Durch mein Praxissemester mit darauf folgenden Werkstudententätigkeit und Bachelorarbeit bei {{ employer.name }} konnte ich bereits viele zeitaktuelle Erfahrungen und Fähigkeiten erwerben.</p>
           <p>Davon abgesehen engagiere ich mich ehrenamtlich in verschiedenen Positionen und arbeite gerne mit Menschen an gemeinsamen Projekten.</p>
+
         </article>
       </section>
 
@@ -214,6 +303,16 @@ const volunteering = [
 
         <div class="timeline-overview" :style="selectedTimelineStyle()" aria-label="Position des ausgewählten Zeitraums auf der Gesamtzeitleiste">
           <span class="timeline-overview__active" aria-hidden="true"></span>
+        </div>
+        <div class="timeline-years" aria-hidden="true">
+          <span
+            v-for="marker in timelineMarkers"
+            :key="marker.label"
+            class="timeline-year"
+            :style="timelineMarkerStyle(marker.month)"
+          >
+            {{ marker.label }}
+          </span>
         </div>
 
         <div class="timeline" aria-label="Zeitstrahl des Werdegangs">
@@ -241,7 +340,7 @@ const volunteering = [
           <div>
             <p class="timeline-detail__period">{{ selectedTimelineItem.period }}</p>
             <p>{{ selectedTimelineItem.description }}</p>
-            <a v-if="selectedTimelineItem.organization === 'abas GmbH'" href="https://www.abas-erp.com" target="_blank" rel="noopener">{{ selectedTimelineItem.organization }}</a>
+            <a v-if="selectedTimelineItem.organization === employer.name" :href="employer.website" target="_blank" rel="noopener">{{ selectedTimelineItem.organization }}</a>
             <p v-else class="timeline-detail__organization">{{ selectedTimelineItem.organization }}</p>
           </div>
           <a v-if="['Berufserfahrung', 'Abschlussarbeit'].includes(selectedTimelineItem.type)" class="timeline-detail__more" href="#wirtschaft">
@@ -256,29 +355,63 @@ const volunteering = [
           <h2>Projekte</h2>
         </article>
 
-        <article v-for="p in projects" :key="p.title" :id="p.id" class="info-card">
-          <h3>{{ p.title }}</h3>
-          <p>{{ p.desc }}</p>
-          <p>
-            <a :href="p.github">GitHub</a> · <a :href="p.link">Live</a>
-          </p>
-        </article>
+        <div ref="projectsBand" class="projects-track" aria-label="Projekte">
+          <article v-for="p in projects" :key="p.title" :id="p.id" class="project-card">
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.desc }}</p>
+            <p v-if="p.github || p.link">
+              >
+              <a v-if="p.github" :href="p.github" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <span v-if="p.github && p.link"> · </span>
+              <a v-if="p.link" :href="p.link" target="_blank" rel="noopener noreferrer">Live</a>
+            </p>
+            <p v-if="p.certificates">
+              <a
+                v-for="(certificate, index) in p.certificates"
+                :key="certificate.href"
+                :href="certificate.href"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span v-if="index"> · </span>{{ certificate.label }}
+              </a>
+            </p>
+          </article>
+        </div>
       </section>
 
       <section id="skills" class="section-grid" style="margin-top:18px">
-        <article class="info-card" style="grid-column: span 2">
+        <article class="skills-content" style="grid-column: 1 / -1">
           <h2>Fähigkeiten</h2>
-          <ul>
-            <li v-for="s in skills" :key="s">{{ s }}</li>
-          </ul>
-        </article>
+          <div class="skills-selector" aria-label="Skill-Kategorien">
+            <button
+              v-for="group in skillGroups"
+              :key="group.title"
+              class="skills-selector__item"
+              :class="{ 'skills-selector__item--active': selectedSkillGroup.title === group.title }"
+              type="button"
+              :aria-pressed="selectedSkillGroup.title === group.title"
+              @click="selectedSkillGroup = group"
+            >
+              <span class="skills-selector__marker" aria-hidden="true"></span>
+              <span>
+                <strong>{{ group.title }}</strong>
+                <small>{{ group.label }}</small>
+              </span>
+            </button>
+          </div>
 
-        <aside class="panel-card" style="align-self:start">
-          <h3>Ausbildung</h3>
-          <ul>
-            <li v-for="e in education" :key="e.title">{{ e.year }} — {{ e.title }} ({{ e.org }})</li>
-          </ul>
-        </aside>
+          <div class="skills-detail" aria-live="polite">
+            <div>
+              <p class="eyebrow">Ausgewählt</p>
+              <h3>{{ selectedSkillGroup.title }}</h3>
+              <p>{{ selectedSkillGroup.description }}</p>
+            </div>
+            <ul class="skills-detail__list">
+              <li v-for="skill in selectedSkillGroup.items" :key="skill">{{ skill }}</li>
+            </ul>
+          </div>
+        </article>
       </section>
 
       <section id="wirtschaft" class="section-grid" style="margin-top:18px">
@@ -287,7 +420,8 @@ const volunteering = [
         </article>
 
         <article v-for="w in workExperience" :key="w.period" class="info-card">
-          <h3>{{ w.role }} — {{ w.company }}</h3>
+          <h3 class="work-role">{{ w.role }}</h3>
+          <p class="work-company"> > {{ w.company }}</p>
           <p>{{ w.period }}</p>
           <p>{{ w.desc }}</p>
           <p v-if="w.role === 'Thesis'"><a href="#bachelorarbeit">Zur Bachelorarbeit</a></p>
@@ -300,12 +434,13 @@ const volunteering = [
           <h2>Ehrenamt</h2>
         </article>
 
-        <div class="ehrenamt-track" aria-label="Ehrenamtliche Tätigkeiten">
+        <div ref="ehrenamtBand" class="ehrenamt-track" aria-label="Ehrenamtliche Tätigkeiten">
           <article v-for="item in volunteering" :key="`${item.role}-${item.period}`" class="info-card ehrenamt-card">
-            <h3>{{ item.role }}</h3>
-            <p>{{ item.organization }}</p>
+            <h3 class="work-role">{{ item.role }}</h3>
+            <p class="work-company"> > {{ item.organization }}</p>
             <p>{{ item.period }}</p>
             <p v-if="item.description">{{ item.description }}</p>
+            <p v-if="item.site"><a :href="item.site" target="_blank" rel="noopener">{{ item.site }}</a></p>
           </article>
         </div>
       </section>

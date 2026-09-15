@@ -6,6 +6,10 @@
   --accent: #b984ff; /* purple accent */
   --neon: #9b59ff;   /* neon purple */
   --glass: rgba(10,14,20,0.6);
+  --project-color: #6ee7ff;
+  --wirtschaft-color: #a7b810;
+  --ehrenamt-color: #2f8f68;
+
 }
 
 *{box-sizing:border-box}
@@ -46,23 +50,56 @@ a:hover{color:#fff}
 .nav__links a{margin-left:14px;color:var(--muted);font-size:0.95rem}
 
 .hero{display:grid;grid-template-columns:1.5fr 0.9fr;gap:20px;align-items:stretch}
-.hero__copy{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 12px 30px rgba(0,0,0,0.6)}
+.hero__copy{display:flex;flex-direction:column;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 12px 30px rgba(0,0,0,0.6)}
 .hero__panel{padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008))}
 .eyebrow{font-size:0.78rem;letter-spacing:0.12em;color:var(--accent);text-transform:uppercase;margin:0 0 10px}
 h1{font-size:clamp(1.8rem,4.5vw,2.6rem);margin:0}
 .lead{margin-top:12px;color:var(--muted);font-size:1rem}
-.hero__actions{margin-top:18px;display:flex;gap:12px}
+.hero__actions{margin-top:auto;padding-top:24px;display:flex;flex-wrap:wrap;gap:8px}
+.hero__actions .button{min-height:34px;padding:7px 10px;font-size:0.85rem}
 
-.button{padding:10px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.008));color:var(--muted);cursor:pointer}
-.button--primary{background:linear-gradient(90deg,var(--neon),var(--accent));color:#fff; border:none; box-shadow:0 10px 30px rgba(155,89,255,0.06)}
+.button{display:inline-flex;align-items:center;min-height:40px;padding:10px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.008));color:var(--muted);cursor:pointer}
+.button--primary{background:linear-gradient(150deg,transparent,var(--neon));color:#fff; border:none; box-shadow:0 10px 30px rgba(155,89,255,0.06)}
 .button--ghost{background:transparent;border:1px dashed rgba(255,255,255,0.04);color:var(--accent)}
+.button--project,.button--wirtschaft,.button--ehrenamt{position:relative;background:transparent;border:1px dashed rgba(255,255,255,0.04);color:var(--accent);box-shadow:none;padding-left:17px}
+.button--project::before,.button--wirtschaft::before,.button--ehrenamt::before{content:'';position:absolute;top:8px;bottom:8px;left:0;width:3px;border-radius:0 3px 3px 0}
+.button--project::before{background:var(--project-color);box-shadow:0 0 8px rgba(110,231,255,0.5)}
+.button--wirtschaft::before{background:var(--wirtschaft-color);box-shadow:0 0 8px rgba(167,184,16,0.4)}
+.button--ehrenamt::before{background:var(--ehrenamt-color);box-shadow:0 0 8px rgba(47,143,104,0.4)}
+.button:hover{background:var(--accent);color:#fff; border:none; box-shadow:0 10px 30px rgba(110,231,255,0.06)}
+.button--project:hover,.button--wirtschaft:hover,.button--ehrenamt:hover{border:1px dashed rgba(255,255,255,0.04)}
+.button--primary:hover{background:var(--accent);color:#fff; border:none; box-shadow:0 10px 30px rgba(155,89,255,0.06)}
 
 .panel-card{padding:12px;border-radius:8px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.04);margin-bottom:10px}
 .panel-card span{display:block;font-size:0.75rem;color:var(--muted);text-transform:uppercase}
 .panel-card strong{display:block;margin-top:6px}
+.language-list{display:flex;flex-direction:column;gap:0}
+.panel-card .language-item{display:flex;align-items:center;gap:8px;font-size:0.95rem}
+.panel-card .language-item + .language-item{margin-top:16px}
+.language-flag{width:24px;height:16px;flex:0 0 24px;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,0.18)}
 
 .section-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
 .info-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008));padding:18px;border-radius:10px;border:1px solid rgba(255,255,255,0.04)}
+.skills-selector{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.skills-selector__item{display:flex;align-items:center;gap:12px;min-width:0;padding:14px;text-align:left;color:var(--muted);background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:8px;font:inherit;cursor:pointer;transition:background 160ms ease,border-color 160ms ease,transform 160ms ease}
+.skills-selector__item:hover,.skills-selector__item--active{background:rgba(155,89,255,0.12);border-color:rgba(185,132,255,0.5);transform:translateY(-2px)}
+.skills-selector__marker{width:12px;height:12px;flex:0 0 12px;border:2px solid rgba(255,255,255,0.35);border-radius:50%;background:transparent;transition:background 160ms ease,box-shadow 160ms ease}
+.skills-selector__item--active .skills-selector__marker{background:var(--accent);border-color:var(--accent);box-shadow:0 0 12px rgba(185,132,255,0.65)}
+.skills-selector__item strong,.skills-selector__item small{display:block}
+.skills-selector__item strong{color:#fff}
+.skills-selector__item small{margin-top:3px;font-size:0.75rem;opacity:0.7}
+.skills-detail{display:grid;grid-template-columns:0.8fr 1.2fr;gap:24px;margin-top:14px;padding:20px;border:1px solid rgba(185,132,255,0.3);border-radius:10px;background:linear-gradient(110deg,rgba(155,89,255,0.12),rgba(255,255,255,0.02));box-shadow:0 12px 30px rgba(0,0,0,0.25)}
+.skills-detail h3{margin:0;font-size:1.2rem;color:#fff}
+.skills-detail p{margin:8px 0 0}
+.skills-detail__list{display:flex;flex-wrap:wrap;align-content:start;gap:10px;margin:0;padding:0;list-style:none}
+.skills-detail__list li{padding:8px 11px;border:1px solid rgba(185,132,255,0.35);border-radius:6px;color:#fff;background:rgba(255,255,255,0.04)}
+.work-role{margin-bottom:2px}
+.work-company{margin:0;font-size:0.75rem}
+#wirtschaft .info-card,.ehrenamt-card{position:relative;transition:transform 160ms ease,box-shadow 160ms ease}
+#wirtschaft .info-card::before,.ehrenamt-card::before,.project-card::before{content:'';position:absolute;top:10px;bottom:10px;left:0;width:4px;border-radius:0 4px 4px 0}
+#wirtschaft .info-card::before{background:var(--wirtschaft-color);box-shadow:0 0 12px rgba(185,132,255,0.45)}
+#ehrenamt .ehrenamt-card::before{background:var(--ehrenamt-color);box-shadow:0 0 12px rgba(47,143,104,0.4)}
+#wirtschaft .info-card:hover,.ehrenamt-card:hover{transform:translateY(-8px);box-shadow:0 18px 38px rgba(0,0,0,0.6)}
 .ehrenamt-track{grid-column:1/-1;display:flex;gap:18px;overflow-x:auto;overscroll-behavior-x:contain;padding:2px 4px 16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
 .ehrenamt-card{flex:0 0 280px;min-height:190px;scroll-snap-align:start}
 .ehrenamt-track::-webkit-scrollbar{height:8px}
@@ -73,6 +110,10 @@ h1{font-size:clamp(1.8rem,4.5vw,2.6rem);margin:0}
 .timeline-heading h2{margin:0;max-width:560px}
 .timeline-overview{position:relative;width:100%;height:3px;margin:0 0 20px;background:repeating-linear-gradient(90deg,rgba(255,255,255,0.3) 0 7px,transparent 7px 13px);border-radius:999px}
 .timeline-overview__active{position:absolute;top:-2px;left:var(--timeline-start);width:var(--timeline-width);height:7px;min-width:5px;border-radius:999px;background:var(--accent);box-shadow:0 0 12px rgba(185,132,255,0.65);transition:left 180ms ease,width 180ms ease}
+.timeline-years{position:relative;height:18px;margin:-12px 0 4px;color:rgba(230,243,255,0.55);font-size:0.68rem}
+.timeline-year{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.timeline-year:first-child{transform:none}
+.timeline-year:last-child{transform:translateX(-100%)}
 .timeline{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:18px 0 12px}
 .timeline-line{position:absolute;top:39px;left:5%;right:5%;height:2px;background:rgba(255,255,255,0.14)}
 .timeline-item{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;padding:0 6px;border:0;background:transparent;color:var(--muted);font:inherit;text-align:center;cursor:pointer}
@@ -92,8 +133,9 @@ h1{font-size:clamp(1.8rem,4.5vw,2.6rem);margin:0}
 /* Projects horizontal band */
 .projects-band{grid-column:1/-1;padding:8px 0 0}
 .projects-band>h2{margin:0 0 12px}
-.projects-track{display:flex;gap:16px;overflow-x:auto;padding:14px 6px 20px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-.project-card{flex:0 0 360px;scroll-snap-align:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.008));border-radius:10px;border:1px solid rgba(255,255,255,0.04);padding:16px;min-height:180px;box-shadow:0 10px 26px rgba(0,0,0,0.55);transition:transform 160ms ease,box-shadow 160ms ease}
+.projects-track{grid-column:1/-1;display:flex;gap:16px;overflow-x:auto;padding:14px 6px 20px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.project-card{position:relative;flex:0 0 360px;scroll-snap-align:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.008));border-radius:10px;border:1px solid rgba(255,255,255,0.04);padding:16px;min-height:180px;box-shadow:0 10px 26px rgba(0,0,0,0.55);transition:transform 160ms ease,box-shadow 160ms ease}
+#projects .project-card::before{background:var(--project-color);box-shadow:0 0 12px rgba(110,231,255,0.5)}
 .project-card:hover{transform:translateY(-8px);box-shadow:0 18px 38px rgba(0,0,0,0.6)}
 .project-card h3{font-size:1rem;margin-bottom:8px}
 .project-links{margin-top:10px;font-size:0.95rem;color:var(--muted)}
@@ -111,6 +153,7 @@ h1{font-size:clamp(1.8rem,4.5vw,2.6rem);margin:0}
 @media (max-width:900px){
   .hero{grid-template-columns:1fr}
   .section-grid{grid-template-columns:1fr}
+  .skills-selector{grid-template-columns:1fr}
   .projects-track{padding:12px}
   .timeline{display:flex;flex-direction:column;gap:16px;padding:0 0 0 18px}
   .timeline-line{top:8px;bottom:8px;left:26px;width:2px;height:auto;right:auto}
@@ -119,5 +162,5 @@ h1{font-size:clamp(1.8rem,4.5vw,2.6rem);margin:0}
   .timeline-period{grid-column:2}
   .timeline-item strong{grid-column:2}
   .timeline-type{display:none}
-  .timeline-detail{grid-template-columns:1fr;gap:8px}
+  .timeline-detail,.skills-detail{grid-template-columns:1fr;gap:8px}
 }
